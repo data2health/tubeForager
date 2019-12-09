@@ -51,6 +51,10 @@ input {
 		  <tube:video videoId="${param.id}">
 			<h2>Video: <tube:videoTitle/></h2>
 			<p><tube:videoDescription/></p>
+            <pre>*** preformatted ***
+            
+            <tube:videoDescription/></pre>
+            <p>Duration: <tube:videoDuration/></p>
 			<p>Tags</p>
 			<ul>
 			<tube:foreachTag var="t">
@@ -59,6 +63,7 @@ input {
 			 </tube:tag>
 			</tube:foreachTag>
 			</ul>
+			<p> </p>
 			<tube:videoPlayer/>
           </tube:video>
              <div style="width: 100%; float: left">
