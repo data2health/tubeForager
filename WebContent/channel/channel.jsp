@@ -45,25 +45,27 @@ input {
 <body class="home page-template-default page page-id-6 CD2H">
 	<jsp:include page="../header.jsp" flush="true" />
 
-	<div class="container-fluid" style="padding-left:5%; padding-right:5%;">
-		<br/> <br/> 
+	<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
+		<br /> <br />
 		<div class="col">
-		  <tube:channel channelId="${param.id}">
-			<h2>Channel: <tube:channelChannelTitle/></h2>
-			<h4>Playlists</h4>
-			<ul>
-			<tube:foreachPlaylist var="cl" sortCriteria="title">
-			 <tube:playlist>
-                <li><a href="../playlist/playlist.jsp?id=${tube:playlistPlaylistIdValue()}"><tube:playlistTitle/></a>
-			 </tube:playlist>
-			</tube:foreachPlaylist>
-            </ul>
-          </tube:channel>
-             <div style="width: 100%; float: left">
-                <jsp:include page="../footer.jsp" flush="true" />
-            </div>
-        </div>
-    </div>
+			<tube:channel channelId="${param.id}">
+				<h2>
+					Channel: <tube:channelChannelTitle />
+				</h2>
+				<h4>Playlists</h4>
+				<ul>
+					<tube:foreachPlaylist var="cl" sortCriteria="title">
+						<tube:playlist>
+							<li><a href="../playlist/playlist.jsp?id=${tube:playlistPlaylistIdValue()}"><tube:playlistTitle /></a>
+						</tube:playlist>
+					</tube:foreachPlaylist>
+				</ul>
+			</tube:channel>
+			<div style="width: 100%; float: left">
+				<jsp:include page="../footer.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

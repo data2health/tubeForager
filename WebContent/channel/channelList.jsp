@@ -45,24 +45,40 @@ input {
 <body class="home page-template-default page page-id-6 CD2H">
 	<jsp:include page="../header.jsp" flush="true" />
 
-	<div class="container-fluid" style="padding-left:5%; padding-right:5%;">
-		<br/> <br/> 
+	<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
+		<br /> <br />
 		<div class="col">
-			<h2>tubeForager Channel List</h2>
+			<h2>Relevant tubeForager Channels</h2>
+			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
+                select channel_id,channel_title from youtube.channel where relevant order by channel_title;
+            </sql:query>
 			<ul>
-			<tube:foreachChannel var="cl" sortCriteria="channel_title">
-			 <tube:channel>
-			     <c:if test="${tube:channelRelevantValue() }">
-                 <li><a href="channel.jsp?id=${tube:channelChannelIdValue()}"><tube:channelChannelTitle/></a>
-			     </c:if>
-			 </tube:channel>
-			</tube:foreachChannel>
-            </ul>
-             <div style="width: 100%; float: left">
-                <jsp:include page="../footer.jsp" flush="true" />
-            </div>
-        </div>
-    </div>
+				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
+					<li><a href="channel.jsp?id=${row.channel_id}">${row.channel_title}</a>
+						<c:if test="${not empty login}">
+							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=false">-</a>
+							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=null">?</a>
+						</c:if>
+				</c:forEach>
+			</ul>
+			<h2>Other tubeForager Channels</h2>
+			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
+                select channel_id,channel_title from youtube.channel where relevant is null order by channel_title;
+            </sql:query>
+			<ul>
+				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
+					<li><a href="channel.jsp?id=${row.channel_id}">${row.channel_title}</a>
+						<c:if test="${not empty login}">
+							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=true">+</a>
+							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=false">-</a>
+						</c:if>
+				</c:forEach>
+			</ul>
+			<div style="width: 100%; float: left">
+				<jsp:include page="../footer.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

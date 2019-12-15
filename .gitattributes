@@ -13,6 +13,7 @@ WebContent/META-INF/MANIFEST.MF -text
 WebContent/WEB-INF/web.xml -text svneol=unset#application/xml
 WebContent/channel/channel.jsp -text
 WebContent/channel/channelList.jsp -text
+WebContent/channel/judgeChannel.jsp -text
 WebContent/footer.jsp -text
 WebContent/graphs/forceGraph.jsp -text
 WebContent/head.jsp -text
@@ -33,7 +34,12 @@ WebContent/images/person_icon.png -text svneol=unset#image/png
 WebContent/images/tile_background4.png -text svneol=unset#image/png
 WebContent/index.jsp -text
 WebContent/local_nav.jsp -text
+WebContent/login.jsp -text
+WebContent/login2.jsp -text
+WebContent/logout.jsp -text
+WebContent/playlist/judgePlaylist.jsp -text
 WebContent/playlist/playlist.jsp -text
+WebContent/playlist/playlistList.jsp -text
 WebContent/resources/cd2h -text
 WebContent/resources/css -text
 WebContent/resources/d3.v3.min.js -text
@@ -44,4 +50,5 @@ WebContent/resources/slick.min.css -text
 WebContent/resources/style.css -text
 WebContent/resources/styles.css -text
 WebContent/video/video.jsp -text
+WebContent/video/videoList.jsp -text
 /pom.xml -text

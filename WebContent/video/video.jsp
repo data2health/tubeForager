@@ -45,32 +45,40 @@ input {
 <body class="home page-template-default page page-id-6 CD2H">
 	<jsp:include page="../header.jsp" flush="true" />
 
-	<div class="container-fluid" style="padding-left:5%; padding-right:5%;">
-		<br/> <br/> 
+	<div class="container-fluid"
+		style="padding-left: 5%; padding-right: 5%;">
+		<br /> <br />
 		<div class="col">
-		  <tube:video videoId="${param.id}">
-			<h2>Video: <tube:videoTitle/></h2>
-			<p><tube:videoDescription/></p>
-            <pre>*** preformatted ***
+			<tube:video videoId="${param.id}">
+				<h2>
+					Video: <tube:videoTitle />
+				</h2>
+				<p>
+					<tube:videoDescription />
+				</p>
+				<pre>*** preformatted ***
             
-            <tube:videoDescription/></pre>
-            <p>Duration: <tube:videoDuration/></p>
-			<p>Tags</p>
-			<ul>
-			<tube:foreachTag var="t">
-			 <tube:tag>
-			     <li><tube:tagTag/>
-			 </tube:tag>
-			</tube:foreachTag>
-			</ul>
-			<p> </p>
-			<tube:videoPlayer/>
-          </tube:video>
-             <div style="width: 100%; float: left">
-                <jsp:include page="../footer.jsp" flush="true" />
-            </div>
-        </div>
-    </div>
+            <tube:videoDescription />
+				</pre>
+				<p>
+					Duration: <tube:videoDuration />
+				</p>
+				<p>Tags</p>
+				<ul>
+					<tube:foreachTag var="t">
+						<tube:tag>
+							<li><tube:tagTag />
+						</tube:tag>
+					</tube:foreachTag>
+				</ul>
+				<p></p>
+				<tube:videoPlayer />
+			</tube:video>
+			<div style="width: 100%; float: left">
+				<jsp:include page="../footer.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

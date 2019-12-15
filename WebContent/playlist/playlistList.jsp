@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <jsp:include page="../head.jsp" flush="true">
-	<jsp:param name="title" value="tubeForager Playlist" />
+	<jsp:param name="title" value="tubeForager Channel List" />
 </jsp:include>
 <style type="text/css" media="all">
 @import "../resources/layout.css";
@@ -48,27 +48,32 @@ input {
 	<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
 		<br /> <br />
 		<div class="col">
-			<tube:playlist playlistId="${param.id}">
-				<h2>
-					Playlist: <tube:playlistTitle />
-				</h2>
-				<p>
-					<tube:playlistDescription />
-				</p>
-				<p>
-					Published: <tube:playlistPublished />
-				</p>
-				<h4>Videos</h4>
-				<ul>
-					<tube:foreachPlaylistItem var="pl">
-						<tube:playlistItem>
-							<tube:video videoId="${tube:playlistItemVideoIdValue()}">
-								<li><a href="../video/video.jsp?id=${tube:playlistItemVideoIdValue()}"><tube:videoTitle /></a>
-							</tube:video>
-						</tube:playlistItem>
-					</tube:foreachPlaylistItem>
-				</ul>
-			</tube:playlist>
+			<h2>Relevant tubeForager Playlists</h2>
+			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
+                select playlist_id,title from youtube.playlist where relevant order by title;
+            </sql:query>
+			<ul>
+				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
+					<li><a href="playlist.jsp?id=${row.playlist_id}">${row.title}</a>
+						<c:if test="${not empty login}">
+							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=false">-</a>
+							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=null">?</a>
+						</c:if>
+				</c:forEach>
+			</ul>
+			<h2>Other tubeForager Playlists</h2>
+			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
+                select playlist_id,title from youtube.playlist where relevant is null order by title limit 100;
+            </sql:query>
+			<ul>
+				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
+					<li><a href="playlist.jsp?id=${row.playlist_id}">${row.title}</a>
+						<c:if test="${not empty login}">
+							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=true">+</a>
+							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=false">-</a>
+						</c:if>
+				</c:forEach>
+			</ul>
 			<div style="width: 100%; float: left">
 				<jsp:include page="../footer.jsp" flush="true" />
 			</div>

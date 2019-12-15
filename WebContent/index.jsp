@@ -44,18 +44,21 @@ input {
 <body class="home page-template-default page page-id-6 CD2H">
 	<jsp:include page="header.jsp" flush="true" />
 
-	<div class="container-fluid" style="padding-left:5%; padding-right:5%;">
-		<br/> <br/> 
+	<div class="container-fluid"
+		style="padding-left: 5%; padding-right: 5%;">
+		<br /> <br />
 		<div class="col">
 			<h2>tubeForager</h2>
 			<ul>
-			 <li><a href="channel/channelList.jsp">Browse channels</a>
+				<li><a href="channel/channelList.jsp">Browse channels</a>
+				<li><a href="playlist/playlistList.jsp">Browse playlists</a>
+				<li><a href="video/videoList.jsp">Browse videos</a>
 			</ul>
-             <div style="width: 100%; float: left">
-                <jsp:include page="footer.jsp" flush="true" />
-            </div>
-        </div>
-    </div>
+			<div style="width: 100%; float: left">
+				<jsp:include page="footer.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

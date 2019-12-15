@@ -1,5 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <div class="container-fluid pt-5">
-	<hr/>
+    <hr/>
+<c:choose>
+<c:when test="${empty login}"><a href="<util:applicationRoot/>/login.jsp">Login</a></c:when>
+<c:otherwise><a href="<util:applicationRoot/>/logout.jsp">Logout</a></c:otherwise>
+</c:choose>
 </div>
 <div class="d-flex justify-content-center flex-row flex-wrap pb-1">
 	<ul id="menu-footer-menu" class="foot nav justify-content-center">
