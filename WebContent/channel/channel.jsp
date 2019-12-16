@@ -48,15 +48,32 @@ input {
 	<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
 		<br /> <br />
 		<div class="col">
+		    [<a href="channelList.jsp">Channels</a>]
 			<tube:channel channelId="${param.id}">
 				<h2>
 					Channel: <tube:channelChannelTitle />
 				</h2>
-				<h4>Playlists</h4>
+				<h4>Relevant Playlists</h4>
 				<ul>
-					<tube:foreachPlaylist var="cl" sortCriteria="title">
+					<tube:foreachPlaylist var="cl" sortCriteria="title" filterCriteria="relevant">
 						<tube:playlist>
-							<li><a href="../playlist/playlist.jsp?id=${tube:playlistPlaylistIdValue()}"><tube:playlistTitle /></a>
+							<li><a href="../playlist/playlist.jsp?id=${tube:playlistPlaylistIdValue()}&channel=${param.id}"><tube:playlistTitle /></a>
+							<c:if test="${not empty login}">
+								<a href="judgeChannelPlaylist.jsp?channel=${param.id}&id=<tube:playlistPlaylistId/>&mode=false">-</a>
+								<a href="judgeChannelPlaylist.jsp?channel=${param.id}&id=<tube:playlistPlaylistId/>&mode=null">?</a>
+							</c:if>
+						</tube:playlist>
+					</tube:foreachPlaylist>
+				</ul>
+				<h4>Other Playlists</h4>
+				<ul>
+					<tube:foreachPlaylist var="cl" sortCriteria="title" filterCriteria="relevant is null">
+						<tube:playlist>
+						  <li><a href="../playlist/playlist.jsp?id=${tube:playlistPlaylistIdValue()}&channel=${param.id}"><tube:playlistTitle /></a>
+							<c:if test="${not empty login}">
+								<a href="judgeChannelPlaylist.jsp?channel=${param.id}&id=<tube:playlistPlaylistId/>&mode=true">+</a>
+								<a href="judgeChannelPlaylist.jsp?channel=${param.id}&id=<tube:playlistPlaylistId/>&mode=false">-</a>
+							</c:if>
 						</tube:playlist>
 					</tube:foreachPlaylist>
 				</ul>

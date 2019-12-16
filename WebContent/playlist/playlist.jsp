@@ -48,6 +48,12 @@ input {
 	<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
 		<br /> <br />
 		<div class="col">
+       <c:if test="${not empty param.channel}">
+           [
+           <a href="../channel/channelList.jsp">Channels</a> >
+           <tube:channel channelId="${param.channel}"><a href="../channel/channel.jsp?id=${param.channel}"><tube:channelChannelTitle/></a></tube:channel>
+           ]
+       </c:if>
 			<tube:playlist playlistId="${param.id}">
 				<h2>
 					Playlist: <tube:playlistTitle />
@@ -58,16 +64,34 @@ input {
 				<p>
 					Published: <tube:playlistPublished />
 				</p>
-				<h4>Videos</h4>
+				<h4>Relevant Videos</h4>
 				<ul>
-					<tube:foreachPlaylistItem var="pl">
+					<tube:foreachPlaylistItem var="pl" useVideo="true" filterCriteria="relevant">
 						<tube:playlistItem>
 							<tube:video videoId="${tube:playlistItemVideoIdValue()}">
-								<li><a href="../video/video.jsp?id=${tube:playlistItemVideoIdValue()}"><tube:videoTitle /></a>
+								<li><a href="../video/video.jsp?id=${tube:playlistItemVideoIdValue()}&channel=${param.channel}&playlist=${param.id}"><tube:videoTitle /></a>
+                                    <c:if test="${not empty login}">
+                                        <a href="judgePlaylistVideo.jsp?playlist=${param.id}&id=<tube:videoVideoId/>&mode=false">-</a>
+                                        <a href="judgePlaylistVideo.jsp?playlist=${param.id}&id=<tube:videoVideoId/>&mode=null">?</a>
+                                    </c:if>
 							</tube:video>
 						</tube:playlistItem>
 					</tube:foreachPlaylistItem>
 				</ul>
+                <h4>Other Videos</h4>
+                <ul>
+                    <tube:foreachPlaylistItem var="pl" useVideo="true" filterCriteria="relevant is null">
+                        <tube:playlistItem>
+                            <tube:video videoId="${tube:playlistItemVideoIdValue()}">
+                                <li><a href="../video/video.jsp?id=${tube:playlistItemVideoIdValue()}&channel=${param.channel}&playlist=${param.id}"><tube:videoTitle /></a>
+                                    <c:if test="${not empty login}">
+                                        <a href="judgePlaylistVideo.jsp?playlist=${param.id}&id=<tube:videoVideoId/>&mode=true">+</a>
+                                        <a href="judgePlaylistVideo.jsp?playlist=${param.id}&id=<tube:videoVideoId/>&mode=false">-</a>
+                                    </c:if>
+                            </tube:video>
+                        </tube:playlistItem>
+                    </tube:foreachPlaylistItem>
+                </ul>
 			</tube:playlist>
 			<div style="width: 100%; float: left">
 				<jsp:include page="../footer.jsp" flush="true" />

@@ -54,6 +54,12 @@ input {
 				<li><a href="playlist/playlistList.jsp">Browse playlists</a>
 				<li><a href="video/videoList.jsp">Browse videos</a>
 			</ul>
+			<p>This application manages search results from YouTube relevant to the CTSA consortium.
+			There is support for browsing of channels, playlists and videos, with the ability to flag each as
+			relevant or non-relevant. Relevant resources are included in CTSAsearch results.
+			While our harvesting of metadata is currently focused on video relevant to investigators and staff,
+			we anticipate that resources relevant to patients and research subjects will also be of interest to
+			the consortium at some point.</p>
 			<div style="width: 100%; float: left">
 				<jsp:include page="footer.jsp" flush="true" />
 			</div>

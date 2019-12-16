@@ -2,6 +2,10 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <div class="container-fluid pt-5">
     <hr/>
+[<a href="<util:applicationRoot/>">Home</a> |
+<a href="<util:applicationRoot/>/channel/channelList.jsp">Channels</a> |
+ <a href="<util:applicationRoot/>/playlist/playlistList.jsp">Playlists</a> |
+ <a href="<util:applicationRoot/>/video/videoList.jsp">Videos</a>]
 <c:choose>
 <c:when test="${empty login}"><a href="<util:applicationRoot/>/login.jsp">Login</a></c:when>
 <c:otherwise><a href="<util:applicationRoot/>/logout.jsp">Logout</a></c:otherwise>

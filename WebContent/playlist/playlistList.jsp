@@ -15,31 +15,27 @@
 @import "../resources/layout.css";
 
 ol {
-    padding-inline-start: 10px;
-    maring-left:0;
-    padding-left:15px;
+	padding-inline-start: 10px;
+	maring-left: 0;
+	padding-left: 15px;
 }
 
 ul {
 	padding-inline-start: 10px;
-    maring-left:0;
-    padding-left:25px;
+	maring-left: 0;
+	padding-left: 25px;
 }
-
 
 input {
-    padding-left: 7px;
-    -webkit-box-sizing: border-box; 
-    -moz-box-sizing: border-box;    
-    box-sizing: border-box;       
+	padding-left: 7px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.desc-list{
-	width=45%;
-	display=inline-block;
+.desc-list {width =45%;display =inline-block;
+	
 }
-
-
 </style>
 
 <body class="home page-template-default page page-id-6 CD2H">
@@ -49,30 +45,28 @@ input {
 		<br /> <br />
 		<div class="col">
 			<h2>Relevant tubeForager Playlists</h2>
-			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
-                select playlist_id,title from youtube.playlist where relevant order by title;
-            </sql:query>
 			<ul>
-				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
-					<li><a href="playlist.jsp?id=${row.playlist_id}">${row.title}</a>
-						<c:if test="${not empty login}">
-							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=false">-</a>
-							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=null">?</a>
-						</c:if>
-				</c:forEach>
+				<tube:foreachPlaylist var="x" sortCriteria="title" filterCriteria="relevant">
+					<tube:playlist>
+						<li><a href="playlist.jsp?id=<tube:playlistPlaylistId/>"><tube:playlistTitle /></a>
+							<c:if test="${not empty login}">
+								<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=false">-</a>
+								<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=null">?</a>
+							</c:if>
+					</tube:playlist>
+				</tube:foreachPlaylist>
 			</ul>
 			<h2>Other tubeForager Playlists</h2>
-			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
-                select playlist_id,title from youtube.playlist where relevant is null order by title limit 100;
-            </sql:query>
 			<ul>
-				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
-					<li><a href="playlist.jsp?id=${row.playlist_id}">${row.title}</a>
-						<c:if test="${not empty login}">
-							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=true">+</a>
-							<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=false">-</a>
-						</c:if>
-				</c:forEach>
+				<tube:foreachPlaylist var="x" sortCriteria="title" filterCriteria="relevant is null" limitCriteria="100">
+					<tube:playlist>
+						<li><a href="playlist.jsp?id=<tube:playlistPlaylistId/>"><tube:playlistTitle /></a>
+							<c:if test="${not empty login}">
+								<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=false">-</a>
+								<a href="judgePlaylist.jsp?id=${row.playlist_id}&mode=null">?</a>
+							</c:if>
+					</tube:playlist>
+				</tube:foreachPlaylist>
 			</ul>
 			<div style="width: 100%; float: left">
 				<jsp:include page="../footer.jsp" flush="true" />

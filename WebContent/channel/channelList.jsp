@@ -15,31 +15,27 @@
 @import "../resources/layout.css";
 
 ol {
-    padding-inline-start: 10px;
-    maring-left:0;
-    padding-left:15px;
+	padding-inline-start: 10px;
+	maring-left: 0;
+	padding-left: 15px;
 }
 
 ul {
 	padding-inline-start: 10px;
-    maring-left:0;
-    padding-left:25px;
+	maring-left: 0;
+	padding-left: 25px;
 }
-
 
 input {
-    padding-left: 7px;
-    -webkit-box-sizing: border-box; 
-    -moz-box-sizing: border-box;    
-    box-sizing: border-box;       
+	padding-left: 7px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.desc-list{
-	width=45%;
-	display=inline-block;
+.desc-list {width =45%;display =inline-block;
+	
 }
-
-
 </style>
 
 <body class="home page-template-default page page-id-6 CD2H">
@@ -49,30 +45,28 @@ input {
 		<br /> <br />
 		<div class="col">
 			<h2>Relevant tubeForager Channels</h2>
-			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
-                select channel_id,channel_title from youtube.channel where relevant order by channel_title;
-            </sql:query>
 			<ul>
-				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
-					<li><a href="channel.jsp?id=${row.channel_id}">${row.channel_title}</a>
-						<c:if test="${not empty login}">
-							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=false">-</a>
-							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=null">?</a>
-						</c:if>
-				</c:forEach>
+				<tube:foreachChannel var="x" sortCriteria="channel_title" filterCriteria="relevant">
+					<tube:channel>
+						<li><a href="channel.jsp?id=<tube:channelChannelId/>"><tube:channelChannelTitle /></a>
+							<c:if test="${not empty login}">
+								<a href="judgeChannel.jsp?id=<tube:channelChannelId/>&mode=false">-</a>
+								<a href="judgeChannel.jsp?id=<tube:channelChannelId/>&mode=null">?</a>
+							</c:if>
+					</tube:channel>
+				</tube:foreachChannel>
 			</ul>
 			<h2>Other tubeForager Channels</h2>
-			<sql:query var="result" dataSource="jdbc/YouTubeTagLib">
-                select channel_id,channel_title from youtube.channel where relevant is null order by channel_title;
-            </sql:query>
 			<ul>
-				<c:forEach items="${result.rows}" var="row" varStatus="rowCounter">
-					<li><a href="channel.jsp?id=${row.channel_id}">${row.channel_title}</a>
-						<c:if test="${not empty login}">
-							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=true">+</a>
-							<a href="judgeChannel.jsp?id=${row.channel_id}&mode=false">-</a>
-						</c:if>
-				</c:forEach>
+				<tube:foreachChannel var="x" sortCriteria="channel_title" filterCriteria="relevant is null">
+					<tube:channel>
+						<li><a href="channel.jsp?id=<tube:channelChannelId/>"><tube:channelChannelTitle /></a>
+							<c:if test="${not empty login}">
+								<a href="judgeChannel.jsp?id=<tube:channelChannelId/>&mode=true">+</a>
+								<a href="judgeChannel.jsp?id=<tube:channelChannelId/>&mode=false">-</a>
+							</c:if>
+					</tube:channel>
+				</tube:foreachChannel>
 			</ul>
 			<div style="width: 100%; float: left">
 				<jsp:include page="../footer.jsp" flush="true" />

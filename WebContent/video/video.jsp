@@ -49,6 +49,13 @@ input {
 		style="padding-left: 5%; padding-right: 5%;">
 		<br /> <br />
 		<div class="col">
+       <c:if test="${not empty param.channel}">
+           [
+           <a href="../channel/channelList.jsp">Channels</a> >
+           <tube:channel channelId="${param.channel}"><a href="../channel/channel.jsp?id=${param.channel}"><tube:channelChannelTitle/></a></tube:channel> >
+           <tube:playlist playlistId="${param.playlist}"><a href="../playlist/playlist.jsp?id=${param.playlist}"><tube:playlistTitle/></a></tube:playlist>
+           ]
+       </c:if>
 			<tube:video videoId="${param.id}">
 				<h2>
 					Video: <tube:videoTitle />

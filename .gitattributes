@@ -14,6 +14,7 @@ WebContent/WEB-INF/web.xml -text svneol=unset#application/xml
 WebContent/channel/channel.jsp -text
 WebContent/channel/channelList.jsp -text
 WebContent/channel/judgeChannel.jsp -text
+WebContent/channel/judgeChannelPlaylist.jsp -text
 WebContent/footer.jsp -text
 WebContent/graphs/forceGraph.jsp -text
 WebContent/head.jsp -text
@@ -38,6 +39,7 @@ WebContent/login.jsp -text
 WebContent/login2.jsp -text
 WebContent/logout.jsp -text
 WebContent/playlist/judgePlaylist.jsp -text
+WebContent/playlist/judgePlaylistVideo.jsp -text
 WebContent/playlist/playlist.jsp -text
 WebContent/playlist/playlistList.jsp -text
 WebContent/resources/cd2h -text
